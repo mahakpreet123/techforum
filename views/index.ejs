@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>Welcome</title>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .bg-cover {
+      background-image: url('/images/welcome.jpg'); 
+      background-size: cover;
+      background-position: right;
+      height: 100%;
+      margin-left: 23rem;
+      color: white;
+      display: flex;
+      align-items: center;
+      padding-left: 2rem; 
+    }
+
+    .content {
+      text-align: left;
+      margin-right: auto; 
+      border-radius: 10px;
+      overflow: hidden;
+      position: absolute;
+      top: 50%;
+      left: 100px;
+      transform: translateY(-50%);
+    }
+
+    .slide-in {
+      color: #362cc0;
+      opacity: 0;
+      transform: translateX(-100%);
+      animation: slideIn 1s forwards;
+    }
+
+    @keyframes slideIn {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .btn-primary {
+      color: white;
+      background-color: #362cc0;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-cover "></div>
+    <div class="content">
+      <h1 class="slide-in">Welcome to <span style="color: blue;font-family: 'Times New Roman', Times, serif;">Tech</span><span style="color: red;font-family: 'Times New Roman', Times, serif;">Forum</span></h1>
+      <a href="/auth/login" class="btn btn-primary mt-4 slide-in">Login</a>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

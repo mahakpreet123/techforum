@@ -1,0 +1,60 @@
+body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding-top: 56px; /* Adjust if you have a fixed navbar */
+    }
+
+    .navbar {
+      background-color: #362cc0;
+    }
+
+    .navbar-brand, .navbar-nav .nav-link {
+      color: white;
+    }
+
+    .profile-header {
+      background-color: #362cc0;
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    .profile-header img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 5px solid white;
+    }
+
+    .profile-header h1 {
+      margin-top: 15px;
+    }
+
+    .profile-info {
+      margin-top: -60px;
+    }
+
+    .profile-info .card {
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .recent-posts {
+      margin-top: 30px;
+      color: wheat;
+    }
+
+    .recent-posts .card {
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .footer {
+      background-color: #362cc0;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }

@@ -1,0 +1,201 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1b;
+    color: #d7dadc;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+.navbar-brand {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+.sidebar-content {
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-brand {
+    margin: 0;
+    font-size: 24px;
+    margin-bottom: 3rem;
+}
+
+.navbar-nav {
+    text-decoration: none;
+    flex-direction: row;
+    gap: 15px; 
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: inherit;
+    padding: 8px 12px;
+    font-size: 16px;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+}
+
+.nav-link-login {
+    color: red; /* You can style the logout link differently if needed */
+}
+
+.container {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    padding: 20px;
+}
+
+.sidebar {
+    width: 25%;
+    background-color: #272729;
+    border-radius: 8px;
+    padding: 20px;
+    margin-right: 20px;
+}
+
+.sidebar-content h2 {
+    margin-bottom: 15px;
+}
+
+.sidebar-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-content ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar-content ul li a {
+    color: #d7dadc;
+    text-decoration: none;
+}
+
+.main-content {
+    width: 75%;
+}
+
+.post-container {
+    background-color: #272729;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #343536;
+    border-radius: 4px;
+    background-color: #1a1a1b;
+    color: #d7dadc;
+    font-size: 16px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input[type="file"] {
+    color: #d7dadc;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.tag-input {
+    margin-top: 10px;
+}
+
+.markdown-editor {
+    display: flex;
+    justify-content: space-between;
+    background-color: #343536;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.markdown-editor button {
+    background-color: transparent;
+    border: none;
+    color: #d7dadc;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.markdown-editor button:hover {
+    color: #007bff;
+}
+
+.title-counter {
+    text-align: right;
+    font-size: 12px;
+    color: #757575;
+}
+
+.title-input {
+    position: relative;
+}
+
+.title-input input {
+    padding-right: 50px; /* Adjust to provide space for counter */
+}
+
+.title-counter {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.image-preview {
+    margin-top: 10px;
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border: 1px solid #343536;
+    border-radius: 4px;
+}

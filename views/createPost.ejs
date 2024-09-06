@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create a Post</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="sidebar-content d-flex align-items-center justify-content-between">
+        <h1 class="navbar-brand"><span style="color: blue;">Tech</span><span style="color: red;">Forum</span></h1>
+        <ul class="navbar-nav d-flex flex-row">
+            <li class="nav-item">
+                <a class="nav-link" href="/auth/homepage">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/posts/profile">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link nav-link-login" href="/auth/logout">Logout</a>
+            </li>
+        </ul>
+    </div>
+  </div>
+
+  <div class="container">
+    <main class="main-content">
+      <div class="post-container">
+        <h1>Create a Post</h1>
+        <form id="postForm" method="POST" enctype="multipart/form-data">
+          <div class="form-group">
+              <label for="post-title">Title</label>
+              <input type="text" id="post-title" name="title" maxlength="300" required>
+          </div>
+          <div class="form-group">
+              <label for="post-content">Body</label>
+              <textarea id="post-content" name="content" rows="10" required></textarea>
+          </div>
+          <div class="form-group">
+              <label for="post-image">Attach an image (optional)</label>
+              <input type="file" id="post-image" name="image" accept="image/*">
+          </div>
+          <div class="form-actions">
+              <button type="submit" class="btn btn-primary" id="createPostButton" onclick="submitForm('/posts/create')">Post</button>
+              <!-- <button type="submit" class="btn" id="saveDraftButton" onclick="submitForm('/posts/save-draft')">Save Draft</button> -->
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+  
+  <script>
+      function submitForm(action) {
+          const form = document.getElementById('postForm');
+          form.action = action;
+          form.submit(); 
+      }
+  </script>
+</body>
+
+</html>
