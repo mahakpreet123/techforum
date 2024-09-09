@@ -47,12 +47,11 @@ router.post('/register', [
   }
 
   const { name, email, password, phone } = req.body;
-
   try {
     const otp = Math.floor(100000 + Math.random() * 900000);
-    const user = new User({ name, email, password, phone, otp });
-    await user.save();
-    console.log("User object:", user);
+    req.session.registrationDetails = { name, email, password, phone, otp };
+    
+    // Send OTP via Twilio
     client.messages
       .create({
         body: `Your OTP code is ${otp}`,
@@ -61,7 +60,7 @@ router.post('/register', [
       })
       .then(message => {
         console.log(`Message sent: ${message.sid}`);
-        res.redirect('/auth/verify-otp');
+        res.redirect(`/auth/verify-otp`);
       })
       .catch(error => {
         console.error('Error sending OTP:', error);
@@ -69,56 +68,73 @@ router.post('/register', [
       });
   } catch (error) {
     console.error('Error registering user:', error);
-    res.status(500).send('Server error');
+    res.status(500).alert('Server error');
   }
 });
+
 // Add the GET route for OTP verification page
 router.get('/verify-otp', (req, res) => {
   res.render('verify-otp');
 });
 
 router.post('/verify-otp', [
-  body('phone').isMobilePhone().withMessage('Invalid phone number.'),
   body('otp').isLength({ min: 6, max: 6 }).withMessage('OTP should be 6 digits.')
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-      return res.status(400).render('verify-otp', { errors: errors.array() });
+    return res.status(400).render('verify-otp', { errors: errors.array() });
   }
 
-  const { phone, otp, password } = req.body;
+  const { otp } = req.body;
+  const registrationDetails = req.session.registrationDetails;
+
+  if (!registrationDetails) {
+    return res.status(400).send('Session expired. Please register again.');
+  }
 
   try {
-      const user = await User.findOne({ phone });
-      if (user && user.otp === otp) {
-          user.otp = null;
-          await user.save();
-          const mailOptions = {
-              from: 'mahakpreet208@gmail.com',
-              to: user.email, 
-              subject: 'Welcome to TechForum',
-              text: `Hello ${user.name},\n\nWelcome to TechForum! You have successfully registered.\n\nHere are your login details:\n\nUsername: ${user.name}\nPhone Number: ${user.phone}\n\nBest Regards,\nTechForum Team`, 
-          };
+    if (registrationDetails.otp == otp) {
+      const user = new User({
+        name: registrationDetails.name,
+        email: registrationDetails.email,
+        password: registrationDetails.password,
+        phone: registrationDetails.phone,
+        otp:null
+      });
+      
 
-          transporter.sendMail(mailOptions, (error, info) => {
-              if (error) {
-                  console.log('Error sending email:', error);
-                  return res.status(500).send('Error sending welcome email');
-              } else {
-                  console.log('Email sent: ' + info.response);
-                  res.redirect('/auth/login');
-              }
-          });
+      await user.save();
 
-      } else {
-          console.log("OTP verification failed.");
-          res.status(400).send('Invalid OTP');
-      }
+      // Clear session after successful registration
+      req.session.registrationDetails = null;
+
+      // Send welcome email
+      const mailOptions = {
+        from: 'mahakpreet208@gmail.com',
+        to: user.email,
+        subject: 'Welcome to TechForum',
+        text: `Hello ${user.name},\n\nWelcome to TechForum! You have successfully registered.\n\nHere are your login details:\n\nUsername: ${user.name}\nPhone Number: ${user.phone}\n\nBest Regards,\nTechForum Team`,
+      };
+
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log('Error sending email:', error);
+          return res.status(500).send('Error sending welcome email');
+        } else {
+          console.log('Email sent: ' + info.response);
+          res.redirect('/auth/login');
+        }
+      });
+
+    } else {
+      res.status(400).send('Invalid OTP');
+    }
   } catch (error) {
-      console.error('Error verifying OTP:', error);
-      res.status(500).send('Error verifying OTP');
+    console.error('Error verifying OTP:', error);
+    res.status(500).send('Server error');
   }
 });
+// resend otp
 router.get('/resend-otp', async (req, res) => {
   try {
     const phone = req.query.phone; 
@@ -151,7 +167,7 @@ router.get('/resend-otp', async (req, res) => {
     res.status(500).send('Error resending OTP');
   }
 });
-// Login
+// Login page
 router.get('/login', (req, res) => {
   res.render('login');
 });
@@ -183,6 +199,7 @@ router.post('/login', async (req, res) => {
     res.redirect('/auth/login');
   }
 });
+
 
 // Profile
 router.get('/profile', async (req, res) => {
@@ -219,7 +236,9 @@ router.get('/logout', (req, res) => {
     res.redirect('/auth/login');
   });
 });
-
+router.get('/about', (req, res) => {
+  res.render('about-us'); 
+});
 
 
 module.exports = router;

@@ -1,0 +1,64 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+.about-us {
+    background-color: #f8f9fa;
+}
+
+.about-us h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.about-us .lead {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.about-us h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.about-us img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 1.5rem;
+}
+
+footer {
+    background-color: #343a40;
+    color: #ffffff;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* Responsive Features */
+@media (max-width: 768px) {
+    .about-us h1 {
+        font-size: 2rem;
+    }
+
+    .about-us h2 {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .about-us h1 {
+        font-size: 1.8rem;
+    }
+
+    .about-us h2 {
+        font-size: 1.4rem;
+    }
+
+    .about-us p {
+        font-size: 0.9rem;
+    }
+}
